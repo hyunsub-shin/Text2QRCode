@@ -101,22 +101,19 @@ jobs:
       id: create_tag  # 다음 단계에서 이 단계의 출력을 참조하기 위한 ID
       run: |
         # 가장 최근 태그를 가져옴. 태그가 없으면 v1.0.0을 시작점으로 사용
-        latest_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+        $latest_tag = git describe --tags --abbrev=0 2>$null
+        if (-not $latest_tag) { $latest_tag = "v1.0.0" }
         
         # 버전 번호를 major.minor.patch로 분리
-        # sed 's/v//'는 버전 문자열에서 'v' 접두사를 제거
-        # cut -d. -f1,2,3은 점(.)을 구분자로 사용하여 각 버전 번호를 추출
-        major=$(echo $latest_tag | sed 's/v//' | cut -d. -f1)
-        minor=$(echo $latest_tag | sed 's/v//' | cut -d. -f2)
-        patch=$(echo $latest_tag | sed 's/v//' | cut -d. -f3)
+        $major, $minor, $patch = $latest_tag -replace 'v', '' -split '\.'
         
         # patch 버전을 1 증가
-        new_patch=$((patch + 1))
+        $new_patch = [int]$patch + 1
         # 새로운 태그 생성 (v1.0.1 형식)
-        new_tag="v${major}.${minor}.${new_patch}"
+        $new_tag = "v$major.$minor.$new_patch"
         
         # 디버깅을 위해 새 태그 정보 출력
-        echo "Creating new tag: $new_tag"
+        Write-Host "Creating new tag: $new_tag"
         # 다음 단계에서 사용할 수 있도록 태그 값을 GitHub Actions 출력 변수로 저장
         echo "new_tag=${new_tag}" >> $GITHUB_OUTPUT
         
