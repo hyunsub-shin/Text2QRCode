@@ -218,7 +218,7 @@ jobs:
       with:
         tag_name: ${{ steps.create_tag.outputs.new_tag }}  # 이전 단계에서 생성한 태그 사용
         files: |  # 릴리스에 포함할 파일들
-          dist/txt2qrcode*  # dist 폴더 내의 실행 파일 (슬래시 사용)
+          dist/txt2qrcode.exe  # dist 폴더 내의 실행 파일 (슬래시 사용)
         name: Release ${{ steps.create_tag.outputs.new_tag }}  # 릴리스 제목
         draft: false  # 초안 모드로 생성하지 않음
         prerelease: false  # 정식 릴리스로 표시
