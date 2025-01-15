@@ -1,0 +1,11 @@
+# Virtual Environment
+venv_qrcode/
+build
+dist
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
