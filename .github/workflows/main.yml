@@ -216,4 +216,10 @@ jobs:
         generate_release_notes: true  # 자동으로 릴리스 노트 생성
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub API 접근을 위한 토큰
+        
+    - name: Fail if tag creation failed
+      if: steps.create_tag.outputs.new_tag == ''  # 태그 생성 실패 시
+      run: |
+        echo "Error: Tag creation failed!"  # 오류 메시지 출력
+        exit 1  # 실패 처리
 
