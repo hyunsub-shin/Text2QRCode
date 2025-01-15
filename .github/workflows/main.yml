@@ -64,7 +64,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pandas numpy PyQt5
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if (Test-Path requirements.txt) { pip install -r requirements.txt }
         
     # 파일 구조 확인
     - name: Check file structure
@@ -77,8 +77,8 @@ jobs:
       env:
         CI: true  # CI 환경 변수 설정
       run: |
-        if [ ! -f txt2qrcode.py ]; then echo "Error: txt2qrcode.py not found!" && exit 1; fi  # 파일 존재 여부 확인
-        timeout 10s python txt2qrcode.py  # 10초 후 자동 종료
+        if (-Not (Test-Path txt2qrcode.py)) { Write-Host "Error: txt2qrcode.py not found!" ; exit 1 }  # 파일 존재 여부 확인
+        python txt2qrcode.py  # Python 스크립트 실행
 
   # # 릴리스 자동화를 위한 새로운 job
   # release:
