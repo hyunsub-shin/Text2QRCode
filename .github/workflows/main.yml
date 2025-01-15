@@ -69,8 +69,8 @@ jobs:
     # 파일 구조 확인
     - name: Check file structure
       run: |
-        pwd
-        ls -la
+        Get-Location  # 현재 디렉토리 출력
+        Get-ChildItem -Force  # 모든 파일 및 폴더 목록 출력
         
     # Python 스크립트 실행
     - name: Run Python
