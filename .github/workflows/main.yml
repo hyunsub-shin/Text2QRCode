@@ -198,7 +198,6 @@ jobs:
         pyinstaller txt2qrcode.spec
     
     # GitHub 릴리스를 생성하는 단계
-    needs: Create Executable  # Create Executable 단계가 완료된 후 실행
     - name: Create Release
       if: steps.create_tag.outputs.new_tag != ''  # 태그가 성공적으로 생성된 경우에만 실행
       uses: softprops/action-gh-release@v1
