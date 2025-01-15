@@ -197,10 +197,14 @@ jobs:
       run: |
         pyinstaller txt2qrcode.spec
     
-    - name: Check file structure
-      run: |
-        Get-Location  # 현재 디렉토리 출력
-        Get-ChildItem -Force -Recurse  # 모든 파일 및 폴더 목록 출력
+    # - name: Check file structure
+    #   run: |
+    #     Get-Location  # 현재 디렉토리 출력
+    #     Get-ChildItem -Force -Recurse  # 모든 파일 및 폴더 목록 출력
+
+    # Debug Tag
+    - name: Debug Tag
+      run: echo "New tag: ${{ steps.create_tag.outputs.new_tag }}"
 
     # GitHub 릴리스를 생성하는 단계
     - name: Create Release
@@ -216,4 +220,5 @@ jobs:
         generate_release_notes: true  # 자동으로 릴리스 노트 생성
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub API 접근을 위한 토큰
+
 
