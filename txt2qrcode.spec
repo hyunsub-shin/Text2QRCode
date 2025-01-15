@@ -24,7 +24,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='TEXT2QRCODE',
+    name='txt2qrcode',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
