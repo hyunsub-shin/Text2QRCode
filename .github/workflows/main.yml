@@ -217,6 +217,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub API 접근을 위한 토큰
 
-    # Debug Tag
-    - name: Debug Tag
-      run: echo "New tag: ${{ steps.create_tag.outputs.new_tag }}"
