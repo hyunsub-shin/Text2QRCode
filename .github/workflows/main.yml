@@ -202,13 +202,9 @@ jobs:
     #     Get-Location  # 현재 디렉토리 출력
     #     Get-ChildItem -Force -Recurse  # 모든 파일 및 폴더 목록 출력
 
-    # Debug Tag
-    - name: Debug Tag
-      run: echo "New tag: ${{ steps.create_tag.outputs.new_tag }}"
-
     # GitHub 릴리스를 생성하는 단계
     - name: Create Release
-      # if: steps.create_tag.outputs.new_tag != ''  # 태그가 성공적으로 생성된 경우에만 실행
+      if: steps.create_tag.outputs.new_tag != ''  # 태그가 성공적으로 생성된 경우에만 실행
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ steps.create_tag.outputs.new_tag }}  # 이전 단계에서 생성한 태그 사용
@@ -221,4 +217,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub API 접근을 위한 토큰
 
-
+    # Debug Tag
+    - name: Debug Tag
+      run: echo "New tag: ${{ steps.create_tag.outputs.new_tag }}"
