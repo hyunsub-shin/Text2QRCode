@@ -1,7 +1,8 @@
 # Virtual Environment
 venv_qrcode/
-build
-dist
+build/
+dist/
+
 
 # Python
 __pycache__/
